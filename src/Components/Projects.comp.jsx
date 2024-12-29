@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 // Import Swiper React components
+import projectsData from "../db/Projects";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -8,7 +9,6 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
 import "../index.css";
-
 // import required modules
 import { Pagination, Autoplay } from "swiper/modules";
 export default function Projects() {
@@ -39,68 +39,42 @@ export default function Projects() {
             800: {
               slidesPerView: 2,
             },
-            1100:{
+            1100: {
               slidesPerView: 3,
-            }
+            },
           }}
-        
-          centeredSlides={true}
           spaceBetween={20}
           pagination={{
             clickable: true,
           }}
           autoplay={{
-            delay: 2000,
+            delay: 1000,
             disableOnInteraction: false,
+            pauseOnMouseEnter: false,
           }}
+          speed={8000}
           loop={true}
           modules={[Pagination, Autoplay]}
           className="mySwiper cursor-grab !z-[300] projects_come_up"
         >
-          <SwiperSlide>
-            <img
-              src="./Slider/slider_1.webp"
-              className="object-cover w-full h-full"
-              alt=""
-            />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <img
-              src="./Slider/slider_3.webp"
-              className="object-cover w-full h-full"
-              alt=""
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="./Slider/12.webp"
-              className="object-cover w-full h-full"
-              alt=""
-            />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <img
-              src="./Slider/13.webp"
-              className="object-cover w-full h-full"
-              alt=""
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="./Slider/14.webp"
-              className="object-cover w-full h-full"
-              alt=""
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              src="./Slider/15.webp"
-              className="object-cover w-full h-full"
-              alt=""
-            />
-          </SwiperSlide>
+          {projectsData?.map((project) => (
+            <SwiperSlide className="flex items-center justify-center cursor-grab">
+              <div
+                className="w-[400px] h-[400px] rounded-lg shadow-lg flex items-center justify-center"
+                style={{
+                  background: `linear-gradient(135deg, ${project.colors.primary}, ${project.colors.secondary})`,
+                }}
+              >
+                <a href={project?.liveUrl} className="flex items-center justify-center">
+                  <img
+                    src={project.imageUrl}
+                    alt={project.name}
+                    className="max-w-[90%] max-h-[90%] object-contain"
+                  />{" "}
+                </a>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </section>
     </>

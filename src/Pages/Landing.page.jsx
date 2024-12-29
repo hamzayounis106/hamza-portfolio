@@ -425,7 +425,7 @@ function LandingPage() {
       <Stats />
       <Projects />
       <WhyUs />
-      <Feedback />
+      {/* <Feedback /> */}
       <Contact />
       <Footer />
     </div>
